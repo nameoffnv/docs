@@ -1,10 +1,18 @@
 sudo: false
-
 language: ruby
-
 rvm:
-  - 2.3.3
-  - 2.4.0
-
+- 2.5.1
 cache: bundler
+install: bundle install
 script: bundle exec middleman build
+before_deploy:
+- pip install --user awscli
+deploy:
+- provider: script
+  script: aws s3 sync build s3://developers.endpass.com --region=us-east-1 --delete
+  skip_cleanup: true
+  on:
+    branch: master
+notifications:
+  slack:
+    secure: rUco0dER3Y7CYxvnBiT9aB4rN6FlZ2LKxivXiutjXaSZ3PKsj9RDn1pS8Lrv/A9EwBPgBY5iFs49Q0QJc0ykjyRm/dUR/nGiSNtWwxQDl8CIN0o4E/SRgRyjxne0g6anYCGgHxCzhocIWb7M1KpfZv2eZ2Ykj/7yu3nw9PK56K0k0k2Uq6GSal6J+5BRUxB6AjlX7THThZ0HrRytBpNJhxioyGfJTsOAq9tY1mFRXF3SDUScPUbG8kyR/fyAJFB79TCO3dz+54yfs2onOfLpZXVpTiW6FyrJPCe6NaYncI5kSoa7FEEBEutU6ts1oNFBKGTTDvVthDRaOhpcjwWvUPV31DWyxNGpWF6FQOQ1ixyGNnmWiLQE8x6Or9/3ha6xUZMi+8CYlugKHRGCC3GP7Hhs30EV9q/mpADPop8qFkCWiE9AjhUm/QaRrZmOpPsSHvmTKNO6+x5H/4tgcSzsA5MO+P73HKSYYkNqOfTh+DsgRuXHIxBzX+9FrrItz9EqARixXlE3Iyofw2tvkVYGu+wdJE3O8kGl+ctVMish3oxeglVvD6sGFUW8hINM7MzKRx+FaUB7SJ+/PEb7OlWftTghYBBnLuxn8SiSuOhskHt0ULG2LN9XVczHHTkX92xpYvg1Glgjx+FN96S3Lvb1xXOBfVKkTDc96PxIEo+1duU=

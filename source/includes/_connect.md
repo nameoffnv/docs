@@ -1,8 +1,6 @@
 # Endpass Connect
 
-## API reference
-
-## Library
+## Installation
 
 Install library via `npm` of `yarn`.
 
@@ -13,6 +11,12 @@ yarn add @endpass/connect
 
 You don't need any dependencies like `web3`, Endpass Connect includes it out of
 the box.
+
+Also, you can add `connect` in html with `script` tag:
+
+```html
+<script src="https://unpkg.com/@endpass/connect@0.21.4-beta" type="text/javascript" />
+```
 
 See example in [Demo repository](https://github.com/endpass/connect-demo)
 
@@ -41,7 +45,7 @@ try {
 }
 ```
 
-#### Provider creating
+## Provider creating
 
 If you want to use this library and process `web3` requests through `endpass` services you should complete these conditions.
 
@@ -68,7 +72,7 @@ window.ethereum = provider;
 web3.setProvider(provider);
 ```
 
-### Oauth authorization
+## Oauth authorization
 
 Connect provides Oauth authorization flow which can be used for user authentication and private API calls.
 
@@ -95,67 +99,7 @@ connect.request({
 });
 ```
 
-### API
-
-#### Authorization
-
-| Method   | Params | Returns                                          | Description                                                                                                                                                               |
-| -------- | ------ | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `auth`   |        | Promise<{ status: boolean, message?: string }> | Open Endpass Connect application for user authorization, return promise, which returns object with auth status. See [Errors handling](#errors-handling) for more details. |
-| `logout` |        | Promise<Boolean>                               | Makes logout request and returns status or throw error                                                                                                                    |
-
-#### Account
-
-| Method           | Params | Returns                                                                             | Description                                                                        |
-| ---------------- | ------ | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `getAccountData` |        | Promise<{ activeAccount: string, activeNet: number }>                             | Returns authorized user active account.                                            |
-| `openAccount`    |        | Promise<{ type: string, payload?: { activeAccount: string, activeNet: number } }> | Open Endpass Connect application for change user active address, network or logout |
-
-#### Provider
-
-| Method                | Params                                         | Returns        | Description                                           |
-| --------------------- | ---------------------------------------------- | -------------- | ----------------------------------------------------- |
-| `getProvider`         | `provider: Web3.Provider`                      | Web3Provider | Creates Web3 provider for injection in Web3 instance. |
-| `setProviderSettings` | `{ activeAccount: string, activeNet: number }` |                | Set user settings to the injected `web3` provider.    |
-
-#### Widget
-
-| Method          | Params                 | Returns            | Description                                                        |
-| --------------- | ---------------------- | ------------------ | ------------------------------------------------------------------ |
-| `getWidgetNode` |                        | Promise<Element> | Returns widget iframe node when it is available.                   |
-| `mountWidget`   | `{ position: string }` | Promise<Element> | Mounts Endpass widget on given position and returns iframe element |
-| `unmountWidget` |                        |                    | Removes mounted Endpass widget                                     |
-
-### Interactions with current account
-
-If you use `openAccount` method connect application will open screen with user base settings: current account and network.
-You also can makes logout here. This method will return object with type field. This field determines response type. There is
-two types of response:
-
-- `logout` – means user makes logout from his account.
-- `update` – means user update account settings. Response also contains `payload` field with updated settings object.
-
-At the same time `update` will set new account settings to injected provider. After this, you can refresh browser page
-or something else.
-
-Examples:
-
-```js
-import Connect from '@endpass/connect';
-
-const connect = new Connect();
-
-connect.openAccount().then(res => {
-  if (res.type === 'logout') {
-    // User have logout here
-  } else if (res.type === 'update') {
-    // Account settings was updated by user
-    console.log(res.settings); // { activeAccount: "0x0", activeNet: 1 }
-  }
-});
-```
-
-### Widget
+## Widget
 
 From `0.18.0-beta` version, `@endpass/connect` provides ability to use widget for management accounts, you can also see current account's balance in ether and makes logout.
 
@@ -201,7 +145,7 @@ const connect = new Connect();
 
 Code above will mount widget only on `mountWidget` method call.
 
-#### Widget configuration
+### Widget configuration
 
 As you can see, widget accepts only one parameter – `position`. It takes only
 position properties: `top`, `left`, `bottom`, `right`.
@@ -218,7 +162,7 @@ const connect = new Connect({
 // Widget will not mount
 ```
 
-#### Widget events
+### Widget events
 
 You can also make subscribtion on widget events, like `load`, `open`, `close` etc.
 
@@ -263,6 +207,66 @@ There are available widget events type which you can use in subscribtions:
 - `open` – fires after widget open
 - `close` – fires after widget close
 - `logout` – fires after logout through widget interaction
+
+## API
+
+### Authorization
+
+| Method   | Params | Returns                                          | Description                                                                                                                                                               |
+| -------- | ------ | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `auth`   |        | Promise<{ status: boolean, message?: string }> | Open Endpass Connect application for user authorization, return promise, which returns object with auth status. See [Errors handling](#errors-handling) for more details. |
+| `logout` |        | Promise<Boolean>                               | Makes logout request and returns status or throw error                                                                                                                    |
+
+### Account
+
+| Method           | Params | Returns                                                                             | Description                                                                        |
+| ---------------- | ------ | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `getAccountData` |        | Promise<{ activeAccount: string, activeNet: number }>                             | Returns authorized user active account.                                            |
+| `openAccount`    |        | Promise<{ type: string, payload?: { activeAccount: string, activeNet: number } }> | Open Endpass Connect application for change user active address, network or logout |
+
+### Provider
+
+| Method                | Params                                         | Returns        | Description                                           |
+| --------------------- | ---------------------------------------------- | -------------- | ----------------------------------------------------- |
+| `getProvider`         | `provider: Web3.Provider`                      | Web3Provider | Creates Web3 provider for injection in Web3 instance. |
+| `setProviderSettings` | `{ activeAccount: string, activeNet: number }` |                | Set user settings to the injected `web3` provider.    |
+
+### Widget
+
+| Method          | Params                 | Returns            | Description                                                        |
+| --------------- | ---------------------- | ------------------ | ------------------------------------------------------------------ |
+| `getWidgetNode` |                        | Promise<Element> | Returns widget iframe node when it is available.                   |
+| `mountWidget`   | `{ position: string }` | Promise<Element> | Mounts Endpass widget on given position and returns iframe element |
+| `unmountWidget` |                        |                    | Removes mounted Endpass widget                                     |
+
+### Interactions with current account
+
+If you use `openAccount` method connect application will open screen with user base settings: current account and network.
+You also can makes logout here. This method will return object with type field. This field determines response type. There is
+two types of response:
+
+- `logout` – means user makes logout from his account.
+- `update` – means user update account settings. Response also contains `payload` field with updated settings object.
+
+At the same time `update` will set new account settings to injected provider. After this, you can refresh browser page
+or something else.
+
+Examples:
+
+```js
+import Connect from '@endpass/connect';
+
+const connect = new Connect();
+
+connect.openAccount().then(res => {
+  if (res.type === 'logout') {
+    // User have logout here
+  } else if (res.type === 'update') {
+    // Account settings was updated by user
+    console.log(res.settings); // { activeAccount: "0x0", activeNet: 1 }
+  }
+});
+```
 
 ## Development reference
 

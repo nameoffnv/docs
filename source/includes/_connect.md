@@ -339,6 +339,13 @@ to pattern will be rejected.
 Just run `npm publish` when you are ready to publish new version of package.
 Do not use `semantic-release`, it's not correctly working now!
 
+### Catch oauth popup by localhost
+
+When developing oauth popup, url always will be `https://auth-dev.endpass.com`. If you need change this url to `localhost`:
+ - open popup's devTools
+ - run `location = location.toString().replace('https://auth-dev.endpass.com', 'http://localhost:5000')`
+ - now ready to debug oauth in localhost
+ 
 ## Commands reference
 
 ### Development

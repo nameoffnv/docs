@@ -15,7 +15,7 @@ the box.
 Also, you can add `connect` in html with `script` tag:
 
 ```html
-<script src="https://unpkg.com/@endpass/connect@0.21.4-beta" type="text/javascript" />
+<script src="https://unpkg.com/@endpass/connect@latest/dist/endpass-connect.browser.js" type="text/javascript" />
 ```
 
 See example in [Demo repository](https://github.com/endpass/connect-demo)
@@ -265,9 +265,9 @@ web3.setProvider(provider);
 
 | Method          | Params                 | Returns            | Description                                                        |
 | --------------- | ---------------------- | ------------------ | ------------------------------------------------------------------ |
-| `getWidgetNode` |                        | Promise<Element> | Returns widget iframe node when it is available.                   |
-| `mountWidget`   | `{ position: string }` | Promise<Element> | Mounts Endpass widget on given position and returns iframe element |
-| `unmountWidget` |                        |                    | Removes mounted Endpass widget                                     |
+| `getWidgetNode` |                                                                                   | Promise<Element> | Returns widget iframe node when it is available.                   |
+| `mountWidget`   | `{ position: { top?: string, bottom?: string, left?: string, right: string? } }`  | Promise<Element> | Mounts Endpass widget on given position and returns iframe element |
+| `unmountWidget` |                                                                                   |                    | Removes mounted Endpass widget                                     |
 
 ### Oauth
 
@@ -275,7 +275,7 @@ web3.setProvider(provider);
 | --------------------- | ------------------------------------------------------------------------------------- | ----------------------- | --------------------------------------------------------- |
 | `loginWithOauth`      | {scopes: array<string>, popupHeight: number, popupWidth:number}                       | Promise                 | Authorizes with oauth flow and prepares for api requests. |
 | `request`             | `{ url: string, method: sting, headers: object, params: object, data: sting/object }` | Promise<HttpResponse>   | Makes and http request with access token                  |
-| `logoutFromOauth`     | {scopes: array<string>, popupHeight: number, popupWidth:number}                       | Promise                 | Authorizes with oauth flow and prepares for api requests. |
+| `logoutFromOauth`     |                                                                                       |                         | Logout oauth flow                                         |
 | `setOauthPopupParams` | {height: number, width:number}                                                        |                         | Sets authorization popup dimensions.                      |
 
 ### Interactions with current account
@@ -358,12 +358,12 @@ When developing oauth popup, url always will be `https://auth-dev.endpass.com`. 
 
 ### Building
 
-| Command         | Description                                     |
-| --------------- | ----------------------------------------------- |
-| `build`         | Builds library for production.                  |
-| `build:lib`     | Builds library in production mode with Rollup.  |
-| `build:browser` | Builds library in production mode with Webpack. |
-| `build:dev`     | Builds library for development.                 |
+| Command         | Description                                                                   |
+| --------------- | ----------------------------------------------------------------------------- |
+| `build`         | Builds library for production.                                                |
+| `build:lib`     | Builds library in production mode with Rollup.                                |
+| `build:browser` | Builds library in production mode with Webpack. (and ready to use in browser) |
+| `build:dev`     | Builds library for development.                                               |
 
 ### Misc
 
@@ -371,4 +371,4 @@ When developing oauth popup, url always will be `https://auth-dev.endpass.com`. 
 | ------------- | ------------------------------------------------------ |
 | `format`      | Formats code of packages with `eslint` and `prettier`. |
 | `commit`      | Use commitizen for commit messages.                    |
-| `check-types` |                                                        |
+| `check-types` | Use TypeScript types checking                          |

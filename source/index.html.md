@@ -129,6 +129,52 @@ curl "https://api.endpass.com/v1/user"
 
 ```
 
+## Scopes
+
+### Scopes resource
+
+Returns scopes granted by user for particular application.
+
+```json
+{
+  "scopes": [
+    "user:address:read",
+    "user:phone:read",
+    "documents:status:read",
+    "documents:data:read",
+    "documents:image:read",
+    "wallet:address:read",
+    "wallet:accounts:read",
+    "user:email:read"
+  ]
+}
+```
+
+|Fields            |Description                   |
+|------------------|------------------------------|
+|`scopes` (*string, array*)   |Granted scopes list|
+
+### HTTP Request
+
+`GET https://api.endpass.com/v1/scopes`
+
+```ruby
+
+```
+
+```python
+
+```
+
+```shell
+curl "https://api.endpass.com/v1/scopes"
+  -H "Authorization: Bearer <access_token>"
+```
+
+```javascript
+
+```
+
 ## Accounts
 
 Account resource represents all of a user’s accounts.

@@ -28,7 +28,7 @@ This is a quick start example of Endpass connect library usage.
 
 ## Application registration
 
-To integrate Endpass auth in you application you are required to register it first in [Endpass-Vault](https://vault-dev.endpass.com/#/app/list);
+To integrate Endpass auth in you application you are required to register it first in [Endpass-Vault](https://vault.endpass.com/#/app/list);
 Requiried data:
 
 |Key            |Description   |

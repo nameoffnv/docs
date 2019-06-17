@@ -30,7 +30,9 @@ import Web3 from 'web3';
 import EndpassConnect from '@endpass/connect';
 
 const web3 = new Web3('https://network.url');
-const connect = new EndpassConnect();
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
+});
 ```
 
 Next, you can try to authentificate user.
@@ -53,10 +55,12 @@ Install `web3` library if you want to use it manually in you application. Create
 
 ```js
 import { HttpProvider } from 'web3-providers';
-import Connect from '@endpass/connect';
+import EndpassConnect from '@endpass/connect';
 
 const web3 = new Web3('https://network.url');
-const connect = new Connect();
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
+});
 const provider = connect.getProvider();
 
 // If you are using old versions of web3 (0.30.0-beta and below) you should call
@@ -79,12 +83,12 @@ Connect provides Oauth authorization flow which can be used for user authenticat
 To implement it you first need to register you application at `endpass-vault` and receive your clientId.
 
 ```js
-import Connect from '@endpass/connect';
+import EndpassConnect from '@endpass/connect';
 
 // Initialize Connect with clientId from vault
 
-const connect = new Connect({
-  oauthClientId: YOUR_CLIENT_ID
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!
 });
 
 // Ask user to authorize, or check presented token validity if present
@@ -112,9 +116,10 @@ So, you want to use widget in your dApp. There are two ways to mount it:
 Example:
 
 ```js
-import Connect from '@endpass/connect';
+import EndpassConnect from '@endpass/connect';
 
-const connect = new Connect({
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!
   widget: {
     position: {
       top: '15px',
@@ -129,9 +134,10 @@ Code above will mount widget when user will be authorized.
 ---
 
 ```js
-import Connect from '@endpass/connect';
+import EndpassConnect from '@endpass/connect';
 
-const connect = new Connect({
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
   widget: false,
 });
 
@@ -155,9 +161,10 @@ position properties: `top`, `left`, `bottom`, `right`.
 To prevent widget auto-mounting pass `false` to widget params option.
 
 ```js
-import Connect from '@endpass/connect';
+import EndpassConnect from '@endpass/connect';
 
-const connect = new Connect({
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
   widget: false,
 });
 
@@ -173,9 +180,11 @@ Widget uses HTML Custom Events API and has static `id` and `data-endpass` attrib
 For example, you want to print something in console when widget will be opened:
 
 ```js
-import Connect from '@endpass/connect';
+import EndpassConnect from '@endpass/connect';
 
-const connect = new Connect();
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
+});
 
 const widget = await connect.getWidgetNode();
 
@@ -187,9 +196,10 @@ widget.addEventListener('open', () => {
 Also, `mountWidget` returns frame element on complete:
 
 ```js
-import Connect from '@endpass/connect';
+import EndpassConnect from '@endpass/connect';
 
-const connect = new Connect({
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
   widget: false,
 });
 
@@ -217,10 +227,12 @@ This example will demonstrate you how to update something on widget events firin
 
 ```js
 import { HttpProvider } from 'web3-providers';
-import Connect from '@endpass/connect';
+import EndpassConnect from '@endpass/connect';
 
 const web3 = new Web3('https://network.url');
-const connect = new Connect();
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
+});
 const provider = connect.getProvider();
 
 window.ethereum = provider;
@@ -293,9 +305,11 @@ or something else.
 Examples:
 
 ```js
-import Connect from '@endpass/connect';
+import EndpassConnect from '@endpass/connect';
 
-const connect = new Connect();
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
+});
 
 connect.openAccount().then(res => {
   if (res.type === 'logout') {

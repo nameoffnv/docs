@@ -22,6 +22,77 @@ Welcome to the Endpass API! You can use our API to access Endpass API endpoints,
 
 We have language bindings in Shell and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
+# Quick start
+
+This is a quick start example of Endpass connect library usage.
+
+## Application registration
+
+To integrate Endpass auth in you application you are required to register it first in [Endpass-Vault](https://vault-dev.endpass.com/#/app/list);
+Requiried data:
+
+|Key            |Description   |
+|---------------|--------------|
+|`Domain`       |Domain which will host your application  |
+|`RedirectUrls` |Urls redirection to which will be considered a successful authorisation|
+
+After successful registration you will receive application client ID for fuhrer usage.
+
+## Library integration
+
+There is two ways to pass Endpass connect to your app - depending on either you use modular structure or not.
+
+### CDN integration
+
+If you want to integrate Endpass connect library via script tag just use provided CDN links
+
+||
+|-|
+|https://unpkg.com/@endpass/connect@latest/dist/endpass-connect.browser.js|
+|https://cdn.jsdelivr.net/npm/@endpass/connect@latest/dist/endpass-connect.browser.js|
+
+or specify the version
+
+||
+|-|
+|https://unpkg.com/@endpass/connect@0.22.1-beta/dist/endpass-connect.browser.js|
+|https://cdn.jsdelivr.net/npm/@endpass/connect@0.22.1-beta/dist/endpass-connect.browser.js|
+
+Add script tag to you application, before any calls to Endpass connect.
+
+`<script src="https://unpkg.com/@endpass/connect@latest/dist/endpass-connect.browser.js" type="text/javascript" />`
+
+After this Endpass connect library will be avaliable in your code as a root object variable. Use it as `window.EndpassConnect` or just `EndpassConnect`;
+
+### Modular integration
+
+First you need to install library via package manager.
+
+`yarn add @endpass/connect`
+
+After that import it in desired file with
+
+`import EndpassConnect from '@endpass/connect';`
+
+## Creating instance
+
+To use Endpass connect you first required to create its instance with constructor provided in previous chapter. Remember to pass cliends ID you recieved in first chapter of this guide.
+
+`
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!
+});
+`
+
+## Instance usage
+
+You got your `connect` and ready to authorize users. Just call correct method with correct redirection urs used in first chapter.
+
+`connect.auth()`
+
+This method will return promise with authorisation result.
+
+
 # Constants
 
 ## Document types

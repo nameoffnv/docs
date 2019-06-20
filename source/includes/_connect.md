@@ -59,7 +59,6 @@ If you want to use this library and process `web3` requests through `endpass` se
 Install `web3` library if you want to use it manually in you application. Create instance of `web3` and create provider based on it:
 
 ```js
-import { HttpProvider } from 'web3-providers';
 import EndpassConnect from '@endpass/connect';
 
 const web3 = new Web3('https://network.url');
@@ -79,6 +78,31 @@ window.ethereum = provider;
 // We highly recommend to use both methods for more stability and compatibility
 window.ethereum = provider;
 web3.setProvider(provider);
+
+(async () => {
+  // Modern dapp browsers...
+  if (window.ethereum) {
+    window.web3 = new Web3(ethereum);
+    try {
+        // Request account access if needed
+        await ethereum.enable();
+        // Acccounts now exposed
+        web3.eth.sendTransaction({/* ... */});
+    } catch (error) {
+        // User denied account access...
+    }
+  }
+  // Legacy dapp browsers...
+  else if (window.web3) {
+    window.web3 = new Web3(provider);
+    // Acccounts always exposed
+    web3.eth.sendTransaction({/* ... */});
+  }
+  // Non-dapp browsers...
+  else {
+    console.log('Non-Ethereum browser detected.');
+  }
+})();
 ```
 
 ## Oauth authorization

@@ -15,7 +15,7 @@ the box.
 Also, you can add `connect` in html with `script` tag:
 
 ```html
-<script src="https://unpkg.com/@endpass/connect@latest/dist/endpass-connect.browser.js" type="text/javascript" />
+<script src="https://unpkg.com/@endpass/connect@latest" type="text/javascript" />
 <script type="text/javascript">
   var connect = new window.EndpassConnect({
     oauthClientId: !YOUR_CLIENT_ID!,

@@ -48,19 +48,19 @@ If you want to integrate Endpass connect library via script tag just use provide
 
 ||
 |-|
-|https://unpkg.com/@endpass/connect@latest/dist/endpass-connect.browser.js|
-|https://cdn.jsdelivr.net/npm/@endpass/connect@latest/dist/endpass-connect.browser.js|
+|https://unpkg.com/@endpass/connect@latest|
+|https://cdn.jsdelivr.net/npm/@endpass/connect@latest|
 
 or specify the version
 
 ||
 |-|
-|https://unpkg.com/@endpass/connect@0.22.1-beta/dist/endpass-connect.browser.js|
-|https://cdn.jsdelivr.net/npm/@endpass/connect@0.22.1-beta/dist/endpass-connect.browser.js|
+|https://unpkg.com/@endpass/connect@0.22.1-beta|
+|https://cdn.jsdelivr.net/npm/@endpass/connect@0.22.1-beta|
 
 Add script tag to you application, before any calls to Endpass connect.
 
-`<script src="https://unpkg.com/@endpass/connect@latest/dist/endpass-connect.browser.js" type="text/javascript" />`
+`<script src="https://unpkg.com/@endpass/connect@latest" type="text/javascript" />`
 
 After this Endpass connect library will be avaliable in your code as a root object variable. Use it as `window.EndpassConnect` or just `EndpassConnect`;
 

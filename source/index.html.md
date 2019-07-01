@@ -88,7 +88,7 @@ const connect = new EndpassConnect({
 
 You got your `connect` and ready to authorize users. Just call correct method with correct redirection urs used in first chapter.
 
-`connect.auth()`
+`connect.loginWithOauth(['user:email:read'])`
 
 This method will return promise with authorisation result.
 

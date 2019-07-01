@@ -281,13 +281,6 @@ web3.setProvider(provider);
 
 ## API
 
-### Authorization
-
-| Method   | Params | Returns                                          | Description                                                                                                                                                               |
-| -------- | ------ | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `auth`   |        | Promise<{ status: boolean, message?: string }> | Open Endpass Connect application for user authorization, return promise, which returns object with auth status. See [Errors handling](#errors-handling) for more details. |
-| `logout` |        | Promise<Boolean>                               | Makes logout request and returns status or throw error                                                                                                                    |
-
 ### Account
 
 | Method           | Params | Returns                                                                             | Description                                                                        |
@@ -386,7 +379,7 @@ Do not use `semantic-release`, it's not correctly working now!
 
 When developing oauth popup, url always will be `https://auth-dev.endpass.com`. If you need change this url to `localhost`:
  - open popup's devTools
- - run `location = location.toString().replace('https://auth-dev.endpass.com', 'http://localhost:5000')`
+ - run `location = location.toString().replace('https://auth-dev.endpass.com', 'http://localhost:8080')`
  - now ready to debug oauth in localhost
  
 ## Commands reference

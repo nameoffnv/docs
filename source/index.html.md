@@ -60,7 +60,7 @@ or specify the version
 
 Add script tag to you application, before any calls to Endpass connect.
 
-`<script src="https://unpkg.com/@endpass/connect@latest" type="text/javascript" />`
+`<script src="https://unpkg.com/@endpass/connect@latest" type="text/javascript"></script>`
 
 After this Endpass connect library will be avaliable in your code as a root object variable. Use it as `window.EndpassConnect` or just `EndpassConnect`;
 

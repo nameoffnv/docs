@@ -2,7 +2,7 @@
 
 ## Installation
 
-Install library via `npm` of `yarn`.
+Install library via `npm` or `yarn`.
 
 ```bash
 npm i --save @endpass/connect

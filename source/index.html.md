@@ -128,7 +128,7 @@ Generic user information. By default, only public information is shared without 
 }
 ```
 
-> Authenticated user with their verified phone numbers (user:phone:read permission)
+> Authenticated user with their email (user:email:read permission)
 
 ```json
 {
@@ -137,7 +137,7 @@ Generic user information. By default, only public information is shared without 
 }
 ```
 
-> Authenticated user with their email (user:email:read permission)
+> Authenticated user with their verified phone numbers (user:phone:read permission)
 
 ```json
 {

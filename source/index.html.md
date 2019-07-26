@@ -345,6 +345,12 @@ Document resource represents a user’s document.
     "status": "New",
     "documentType": "Passport",
     "description": "Custom document description",
+    "imageId": "f10c347a-59x2-4259-8e80-d1bb09932z30",
+    "imageHash": "D47D9147CB585F96AB6D6B34DB0D84DD0608E0F8BC6F7604E50373347E276272",
+    "mimeType": "image/jpeg",
+    "backImageId": "h53c347a-59x2-4259-8e80-d1bb09932z30",
+    "backImageHash": "C54D9147CB585F96AB6D6B34DB0D84DD0608E0F8BC6F7604E50373347E276272",
+    "backMimeType": "image/png",
     "firstName": "Test",
     "lastName": "User",
     "number": "47313892501",
@@ -384,6 +390,12 @@ Document resource represents a user’s document.
   ...
   "documentType": "Passport",
   "description": "Custom document description",
+  "imageId": "f10c347a-59x2-4259-8e80-d1bb09932z30",
+  "imageHash": "D47D9147CB585F96AB6D6B34DB0D84DD0608E0F8BC6F7604E50373347E276272",
+  "mimeType": "image/jpeg",
+  "backImageId": "h53c347a-59x2-4259-8e80-d1bb09932z30",
+  "backImageHash": "C54D9147CB585F96AB6D6B34DB0D84DD0608E0F8BC6F7604E50373347E276272",
+  "backMimeType": "image/png",
   "firstName": "Test",
   "lastName": "User",
   "number": "47313892501",
@@ -406,6 +418,12 @@ Document resource represents a user’s document.
 |`status` (*string*, [*enumerable*](#status))              |Document current status   |
 |`documentType` (*string*, [*enumerable*](#document-types))|Document type             |
 |`description` (*string*)                                  |Description               |
+|`imageId` (*string*)                                      |Front File ID             |
+|`imageHash` (*string*)                                    |Front File Hash           |
+|`mimeType` (*string*)                                     |Front File Content Type   |
+|`backImageId` (*string*)                                  |Back File ID              |
+|`backImageHash` (*string*)                                |Back File Hash            |
+|`backMimeType` (*string*)                                 |Back File Content Type    |
 |`firstName` (*string*)                                    |First name                |
 |`lastName` (*string*)                                     |Last name                 |
 |`number` (*string*)                                       |Document number           |
@@ -477,13 +495,15 @@ curl "https://api.endpass.com/v1/documents/{ID}"
 
 ```
 
-### Show document's file
+### Show document's front file
 
-Returns the document file (jpeg, pdf) into `binary` stream.
+Returns the document's front file content (jpeg, pdf) into `binary` stream.
+
+If there is no uploaded file returns *204*.
 
 ### HTTP Request
 
-`GET https://api.endpass.com/v1/documents/{ID}/file`
+`GET https://api.endpass.com/v1/documents/{ID}/front/file`
 
 ### Scopes
 
@@ -498,7 +518,38 @@ Returns the document file (jpeg, pdf) into `binary` stream.
 ```
 
 ```shell
-curl "https://api.endpass.com/v1/documents/{ID}/file"
+curl "https://api.endpass.com/v1/documents/{ID}/front/file"
+  -H "Authorization: Bearer <access_token>"
+```
+
+```javascript
+
+```
+
+### Show document's back file
+
+Returns the document's back file content (jpeg, pdf) into `binary` stream.
+
+If there is no uploaded file returns *204*.
+
+### HTTP Request
+
+`GET https://api.endpass.com/v1/documents/{ID}/back/file`
+
+### Scopes
+
+- `documents:image:read`
+
+```ruby
+
+```
+
+```python
+
+```
+
+```shell
+curl "https://api.endpass.com/v1/documents/{ID}/back/file"
   -H "Authorization: Bearer <access_token>"
 ```
 

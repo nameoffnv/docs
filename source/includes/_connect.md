@@ -25,6 +25,15 @@ Also, you can add `connect` in html with `script` tag:
 
 See example in [Demo repository](https://github.com/endpass/connect-demo)
 
+### Content Security Policy
+
+If you want to use with CSP rules, just copy/paste this code into `<head>` block of your html page
+```html
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self' data: *.endpass.com; script-src 'self' data: 'unsafe-inline' 'unsafe-eval' *.endpass.com unpkg.com; object-src 'self' *.endpass.com; style-src 'self' data: 'unsafe-inline' *.endpass.com; img-src 'self' *.endpass.com; media-src 'self' *.endpass.com; frame-src 'self' *.endpass.com; font-src 'self' *.endpass.com; connect-src 'self' *.endpass.com"/>
+
+```
+
 ### Usage
 
 Create instance of class and use it in your application. You can know about

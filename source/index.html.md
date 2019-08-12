@@ -202,11 +202,13 @@ curl "https://api.endpass.com/v1/user"
 
 ## User's address
 
-`GET https://api.endpass.com/v1/user/address` - retrive user's address information.
+Scope: `user:address:read`
 
-`POST https://api.endpass.com/v1/user/address` - update user's address information.
+Request: `GET https://api.endpass.com/v1/user/address`
 
-|Fields                                      |Description        |
+Fields:
+
+|Field                                       |Description        |
 |--------------------------------------------|-------------------|
 |`apartmentNumber` (*string*)                | Apartment number  |
 |`streetNumber`    (*string*)                | Street Number     |

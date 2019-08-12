@@ -200,6 +200,24 @@ curl "https://api.endpass.com/v1/user"
 
 ```
 
+## User's address
+
+`GET https://api.endpass.com/v1/user/address` - retrive user's address information.
+
+`POST https://api.endpass.com/v1/user/address` - update user's address information.
+
+|Fields                                      |Description        |
+|--------------------------------------------|-------------------|
+|`apartmentNumber` (*string*)                | Apartment number  |
+|`streetNumber`    (*string*)                | Street Number     |
+|`street`          (*string*)                | Street name       |
+|`city`            (*string*)                | City              |
+|`stateRegion`     (*string*)                | State region      |
+|`country`         (*string*)                | Country           |
+|`postalCode`      (*string*)                | PostalCode        |
+|`lat`             (*number*)                | Latitude          |
+|`lng`             (*number*)                | Longitude         |
+
 ## Scopes
 
 ### Scopes resource

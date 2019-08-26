@@ -61,8 +61,11 @@ or specify the version
 Add script tag to you application, before any calls to Endpass connect.
 
 `<script src="https://unpkg.com/@endpass/connect@latest" type="text/javascript"></script>`
+`<script src="https://unpkg.com/@endpass/connect@latest/provider.min.js" type="text/javascript"></script>`
 
-After this Endpass connect library will be avaliable in your code as a root object variable. Use it as `window.EndpassConnect` or just `EndpassConnect`;
+After this Endpass connect library will be available in your code as a root object variable. Use it as `window.EndpassConnect` or just `EndpassConnect`
+
+And plugin for provider usage will be available as `window.EndpassProviderPlugin`.
 
 ### Modular integration
 
@@ -73,6 +76,7 @@ First you need to install library via package manager.
 After that import it in desired file with
 
 `import EndpassConnect from '@endpass/connect';`
+`import EndpassConnectProvider from '@endpass/connect/provider';`
 
 ## Creating instance
 
@@ -81,6 +85,7 @@ To use Endpass connect you first required to create its instance with constructo
 `
 const connect = new EndpassConnect({
   oauthClientId: !YOUR_CLIENT_ID!
+  plugins: [EndpassConnectProvider]
 });
 `
 

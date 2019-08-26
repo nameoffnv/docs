@@ -16,9 +16,11 @@ Also, you can add `connect` in html with `script` tag:
 
 ```html
 <script src="https://unpkg.com/@endpass/connect@latest" type="text/javascript"></script>
+<script src="https://unpkg.com/@endpass/connect@latest/provider.min.js" type="text/javascript"></script>
 <script type="text/javascript">
   var connect = new window.EndpassConnect({
     oauthClientId: !YOUR_CLIENT_ID!,
+    plugins: [window.EndpassProviderPlugin]
   });
 </script>
 ```
@@ -42,23 +44,56 @@ options and methods in the [API section](#api).
 ```js
 import Web3 from 'web3';
 import EndpassConnect from '@endpass/connect';
+import EndpassProviderPlugin from '@endpass/connect/provider';
 
 const web3 = new Web3('https://network.url');
 const connect = new EndpassConnect({
   oauthClientId: !YOUR_CLIENT_ID!,
+  plugins: [EndpassProviderPlugin]
 });
 ```
 
-Next, you can try to authentificate user.
+Next, you can try to authenticate user.
 
 ```js
 try {
-  const res = await connect.auth();
+  const res = await connect.getAccountData();
 
   // Now, you have active account address and network id
 } catch (err) {
-  // Something goes wrong! User is not authorized
+  // Something goes wrong!
 }
+```
+
+### Plugins
+Endpass Connect work with plugins also. By default library work only in `authorize` mode, without any account or `provider` methods. 
+
+But if you need `provider` logic, just import provider file or add it as `<script>` tag
+
+Example `authorize` mode:
+```js
+import EndpassConnect from '@endpass/connect';
+
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
+});
+
+// will throw Error
+const res = await connect.getAccountData(); 
+```
+
+Example `provider` mode:
+```js
+import EndpassConnect from '@endpass/connect';
+import EndpassProviderPlugin from '@endpass/connect/provider';
+
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
+  plugins: [EndpassProviderPlugin],
+});
+
+// will return current account data
+const res = await connect.getAccountData(); 
 ```
 
 ## Provider creating
@@ -69,10 +104,12 @@ Install `web3` library if you want to use it manually in you application. Create
 
 ```js
 import EndpassConnect from '@endpass/connect';
+import EndpassProviderPlugin from '@endpass/connect/provider';
 
 const web3 = new Web3('https://network.url');
 const connect = new EndpassConnect({
   oauthClientId: !YOUR_CLIENT_ID!,
+  plugins: [EndpassProviderPlugin]
 });
 const provider = connect.getProvider();
 
@@ -266,10 +303,12 @@ This example will demonstrate you how to update something on widget events firin
 ```js
 import { HttpProvider } from 'web3-providers';
 import EndpassConnect from '@endpass/connect';
+import EndpassProviderPlugin from '@endpass/connect/provider';
 
 const web3 = new Web3('https://network.url');
 const connect = new EndpassConnect({
   oauthClientId: !YOUR_CLIENT_ID!,
+  plugins: [EndpassProviderPlugin]
 });
 const provider = connect.getProvider();
 
@@ -337,9 +376,11 @@ Examples:
 
 ```js
 import EndpassConnect from '@endpass/connect';
+import EndpassProviderPlugin from '@endpass/connect/provider';
 
 const connect = new EndpassConnect({
   oauthClientId: !YOUR_CLIENT_ID!,
+  plugins: [EndpassProviderPlugin],
 });
 
 connect.openAccount().then(res => {

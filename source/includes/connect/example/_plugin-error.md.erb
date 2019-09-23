@@ -1,0 +1,12 @@
+```js
+import EndpassConnect from '@endpass/connect';
+
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
+});
+
+(async () => {
+  // will throw Error - Provider plugin does not exist
+  const res = await connect.getAccountData(); 
+})();
+```

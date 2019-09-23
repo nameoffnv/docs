@@ -1,0 +1,21 @@
+### Provider
+
+| Method                | Params                                         | Returns        | Description                                           |
+| --------------------- | ---------------------------------------------- | -------------- | ----------------------------------------------------- |
+| `getProvider`         |                       | Promise<`Web3.Provider`> | Creates Web3 provider for injection in Web3 instance. |
+| `setProviderSettings` | `{ activeAccount: string, activeNet: number }` |Promise                | Set user settings to the injected `web3` provider.    |
+
+### Account
+
+| Method           | Params | Returns                                                                             | Description                                                                        |
+| ---------------- | ------ | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `getAccountData` |        | Promise<{ activeAccount: string, activeNet: number }>                             | Returns authorized user active account.                                            |
+| `openAccount`    |        | Promise<{ type: string, payload?: { activeAccount: string, activeNet: number } }> | Open Endpass Connect application for change user active address, network or logout |
+
+### Widget
+
+| Method          | Params                 | Returns            | Description                                                        |
+| --------------- | ---------------------- | ------------------ | ------------------------------------------------------------------ |
+| `getWidgetNode` |                                                                                   | Promise<Element> | Returns widget iframe node when it is available.                   |
+| `mountWidget`   | `{ position: { top?: string, bottom?: string, left?: string, right: string? } }`  | Promise<Element> | Mounts Endpass widget on given position and returns iframe element |
+| `unmountWidget` |                                                                                   |                    | Removes mounted Endpass widget                                     |

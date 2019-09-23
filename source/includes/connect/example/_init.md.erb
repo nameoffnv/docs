@@ -1,0 +1,12 @@
+```js
+// With plugin combination
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!
+  plugins: [EndpassOauthPlugin, EndpassProviderPlugin]
+});
+
+// Only plugin
+const connect = new EndpassOauthPlugin({
+  oauthClientId: !YOUR_CLIENT_ID!
+});
+```

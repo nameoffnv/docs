@@ -1,0 +1,13 @@
+### Interactions with current account
+
+<%= partial "includes/connect/plugins/provider/example/_account-settings.md.erb" %>
+
+If you use `openAccount` method connect application will open screen with user base settings: current account and network.
+You also can makes logout here. This method will return object with type field. This field determines response type. There is
+two types of response:
+
+- `logout` – means user makes logout from his account.
+- `update` – means user update account settings. Response also contains `payload` field with updated settings object.
+
+At the same time `update` will set new account settings to injected provider. After this, you can refresh browser page
+or something else.

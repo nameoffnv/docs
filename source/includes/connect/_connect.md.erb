@@ -1,0 +1,49 @@
+# Endpass Connect client
+
+## Installation
+
+<%= partial "includes/connect/example/_install.md.erb" %>
+
+Install library via `npm` or `yarn`.
+
+<%= partial "includes/connect/example/_import-script.md.erb" %>
+
+Also, you can add `connect` in html with `script` tag.
+
+See example in [Demo repository](https://github.com/endpass/connect-demo)
+
+### Content Security Policy
+
+```html
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: *.endpass.com; script-src 'self' data: 'unsafe-inline' 'unsafe-eval' *.endpass.com unpkg.com; object-src 'self' *.endpass.com; style-src 'self' data: 'unsafe-inline' *.endpass.com; img-src 'self' *.endpass.com; media-src 'self' *.endpass.com; frame-src 'self' *.endpass.com; font-src 'self' *.endpass.com; connect-src 'self' *.endpass.com"/>
+```
+
+If you want to use with CSP rules, just copy/paste this code into `<head>` block of your html page
+
+### Init instance 
+
+<%= partial "includes/connect/example/_init-instance.md.erb" %>
+
+Create instance of class and use it in your application. You can know about
+options and methods in the [Instance methods section](#instance-methods) and [Plugin section](#plugins).
+
+## Plugins
+
+<%= partial "includes/connect/example/_plugin-error.md.erb" %>
+
+|Name|Description|
+|-|-|
+|[OAuth](#oauth-plugin)|For getting private user information from [Server API](#server-api)|
+|[Provider](#provider-plugin)|For inject provider to [Web3](https://web3js.readthedocs.io/en/v1.2.1/) instance|
+
+Endpass Connect work with plugins also. By default library work only with [OAuth plugin](#oauth-plugin), without any account or [Provider plugin](#provider-plugin) methods. 
+
+But if you need `provider` logic, just [import](#provider-plugin) provider file or add it as `<script>` tag
+
+<%= partial "includes/connect/plugins/oauth/_oauth.md.erb" %>
+
+<%= partial "includes/connect/plugins/provider/_provider.md.erb" %>
+
+<%= partial "includes/connect/_methods.md.erb" %>
+
+<%= partial "includes/connect/_development.md.erb" %>

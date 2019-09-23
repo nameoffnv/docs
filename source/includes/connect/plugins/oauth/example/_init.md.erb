@@ -1,0 +1,12 @@
+```js
+// Initialize Connect with clientId from vault and plugin composition
+const connect = new EndpassConnect({
+  oauthClientId: !YOUR_CLIENT_ID!,
+  plugins: [EndpassOauthPlugin]
+});
+
+// or separate plugin instance
+const connect = new EndpassOauthPlugin({
+  oauthClientId: !YOUR_CLIENT_ID!,
+});
+```

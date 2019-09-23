@@ -1,0 +1,40 @@
+```js
+const scopes = [
+  'user:email:read',
+  'user:phone:read',
+];
+
+const requestParams = {
+  url: 'https://api.endpass.com/v1/user',
+  method: 'GET'
+}
+
+// async/await
+(async () => {
+  // Ask user to allow access to personal information
+  const result = await connect.loginWithOauth(scopes);
+  
+  // Fetch required data
+  const userInfo = await connect.request(requestParams);
+})()
+
+// Promise/then
+connect.loginWithOauth(scopes)
+  .then(() => connect.request(requestParams));
+  .then(console.log);
+
+// User info response
+{
+  "id": "0d8c5fa3-c8a5-4c5f-8435-f35aef353f30",
+  "email": "user@endpass.com",
+  "phones": [
+    {
+      "id": "c4d4ef1c-0d73-4a6f-aad9-7600a8fc79b8",
+      "createdAt": 1557220652,
+      "status": "Verified",
+      "country": "7",
+      "number": "7771112233"
+    }
+  ]
+}
+```

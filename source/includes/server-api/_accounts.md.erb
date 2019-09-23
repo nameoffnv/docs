@@ -1,0 +1,60 @@
+## Accounts
+
+Account resource represents all of a user’s accounts.
+
+> List of account
+
+```json
+[
+  "0x123...",
+  "0x456..."
+]
+```
+
+> Account resource
+
+```json
+{
+  "address": "0x123..."
+}
+```
+
+### Account resource
+
+|Fields              |Description        |
+|--------------------|-------------------|
+|`address` (*string*)|Address hash       |
+
+### Show user accounts
+
+Returns a list of user accounts that have a keystore.
+
+### HTTP Request
+
+`GET https://api.endpass.com/v1/accounts`
+
+### Scopes
+
+- `wallet:accounts:read`
+
+```shell
+curl "https://api.endpass.com/v1/accounts"
+  -H "Authorization: Bearer <access_token>"
+```
+
+### Last active account
+
+Returns user last active account.
+
+### HTTP Request
+
+`GET https://api.endpass.com/v1/accounts/active`
+
+### Scopes
+
+- `wallet:address:read`
+
+```shell
+curl "https://api.endpass.com/v1/accounts/active"
+  -H "Authorization: Bearer <access_token>"
+```

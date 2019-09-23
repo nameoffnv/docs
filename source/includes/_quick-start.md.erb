@@ -1,0 +1,77 @@
+# Quick start
+
+A quick start example of using [Endpass Connect](#endpass-connect-client) library.
+
+## Application registration
+
+To integrate Endpass auth into your application, you first need to register it with [Endpass-vault](https://vault.endpass.com/#/apps).
+
+### Requiried data:
+
+|Key            |Description   |
+|---------------|--------------|
+|`Domain`       |The domain in which your application will be hosted|
+|`RedirectUrls` |List of available redirect URLs after successful authorization|
+
+After registration, you will receive the application client ID for future use.
+
+
+## Library integration
+
+There are two ways to install Endpass connect in your application - depending on whether you use a modular structure or not.
+
+### CDN integration
+
+If you want to integrate library via script tag just use provided CDN links
+
+||
+|-|
+|https://unpkg.com/@endpass/connect@latest|
+|https://cdn.jsdelivr.net/npm/@endpass/connect@latest|
+
+or specify the version
+
+||
+|-|
+|https://unpkg.com/@endpass/connect@0.22.1-beta|
+|https://cdn.jsdelivr.net/npm/@endpass/connect@0.22.1-beta|
+
+Add script tag to you application, before any calls to Endpass connect.
+
+<%= partial "includes/connect/example/_import-script.md.erb" %>
+
+After that, the Endpass connect library will be available in your js code as a root object variable. Use it as `window.EndpassConnect` or just `EndpassConnect`
+
+Plugin for oauth will be available as `window.EndpassOauthPlugin`.
+
+And plugin for provider usage - `window.EndpassProviderPlugin`.
+
+[More about plugins](#plugins)
+
+### Modular integration
+
+First you need to install the library through the package manager.
+
+```shell
+// terminal
+yarn add @endpass/connect
+npm i @endpass/connect
+```
+
+After that, import it into the desired file
+
+<%= partial "includes/connect/example/_import-module.md.erb" %>
+
+## Creating instance
+
+To use Endpass connect, create an instance with the constructor presented in the previous [chapter](#library-integration). Remember to pass cliends ID you recieved in the first [chapter](#application-registration) of this guide.
+
+<%= partial "includes/connect/example/_init.md.erb" %>
+
+## Instance usage
+
+<%= partial "includes/connect/plugins/oauth/example/_use.md.erb" %>
+
+You have `connect` and you are ready to get user information. Just call correct method.
+
+For example, `connect.request('/user')` will return promise with [basic user information](#user).

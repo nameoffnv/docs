@@ -1,0 +1,143 @@
+## Provider plugin - Widget
+
+From `0.18.0-beta` version, `@endpass/connect` provides ability to use widget for management accounts, you can also see current account's balance in ether and makes logout.
+
+So, you want to use widget in your dApp. There are two ways to mount it:
+
+1. Widget will automatically mounts on user authorization if you provide `widget` object to connect instance constructor ([see widget configuration](#widget-configuration)).
+
+2. You can mount widget programically with `mountWidget` method and passing parameter.
+
+```js
+// The widget will be mounted when the user is logged in.
+import EndpassProviderPlugin from '@endpass/connect/provider';
+
+const connect = new EndpassProviderPlugin({
+  oauthClientId: !YOUR_CLIENT_ID!
+  widget: {
+    position: {
+      top: '15px',
+      left: '15px',
+    },
+  },
+});
+```
+
+```js
+// The widget will only be mounted when the `mountWidget` method is called.
+import EndpassProviderPlugin from '@endpass/connect/provider';
+
+const connect = new EndpassProviderPlugin({
+  oauthClientId: !YOUR_CLIENT_ID!,
+  widget: false,
+});
+
+(async () => {
+  await connect.mountWidget({
+    position: {
+      bottom: '15px',
+      left: '15px',
+    },
+  });
+})();
+```
+
+### Widget configuration
+
+As you can see, widget accepts only one parameter – `position`. It takes only
+position properties: `top`, `left`, `bottom`, `right`.
+
+To prevent widget auto-mounting pass `false` to widget params option.
+
+```js
+// The Widget won't be mounted
+import EndpassProviderPlugin from '@endpass/connect/provider';
+
+const connect = new EndpassProviderPlugin({
+  oauthClientId: !YOUR_CLIENT_ID!,
+  widget: false,
+});
+```
+
+### Widget events
+
+You can also make subscribtion on widget events, like `load`, `open`, `close` etc.
+
+Widget uses HTML Custom Events API and has static `id` and `data-endpass` attributes.
+
+For example, you want to print something in console when widget will be opened:
+
+```js
+import EndpassProviderPlugin from '@endpass/connect/provider';
+
+const connect = new EndpassProviderPlugin({
+  oauthClientId: !YOUR_CLIENT_ID!,
+});
+
+(async () => {
+  const widget = await connect.getWidgetNode();
+  
+  widget.addEventListener('open', () => {
+    console.log('Widget opened!');
+  });
+})();
+```
+
+Also, `mountWidget` returns frame element on complete:
+
+```js
+import EndpassProviderPlugin from '@endpass/connect/provider';
+
+const connect = new EndpassProviderPlugin({
+  oauthClientId: !YOUR_CLIENT_ID!,
+  widget: false,
+});
+
+(async () => {
+  const widget = await connect.mountWidget();
+
+  widget.addEventListener('open', () => {
+    console.log('Widget opened!');
+  });
+})();
+```
+
+There are available widget events type which you can use in subscribtions:
+
+- `mount` – fires after widget full loading
+- `destroy` – fires before widget unmounting
+- `open` – fires after widget open
+- `close` – fires after widget close
+- `logout` – fires after logout through widget interaction
+- `update` – fires after account change
+
+### Examples
+
+This example will demonstrate you how to update something on widget events firing.
+
+```js
+import EndpassProviderPlugin from '@endpass/connect/provider';
+
+const web3 = new Web3('https://network.url');
+const connect = new EndpassProviderPlugin({
+  oauthClientId: !YOUR_CLIENT_ID!,
+});
+
+(async () => {
+  const provider = await connect.getProvider();
+  
+  window.ethereum = provider;
+  web3.setProvider(provider);
+
+  const widget = await connect.getWidgetNode();
+
+  widget.addEventListener('update', ({ detail }) => {
+    // Log on anything update
+    console.log('Widget data updated: ', detail);
+  });
+  widget.addEventListener('logout', () => {
+    // Reload page on logout
+    window.location.reload();
+  });
+})();
+```

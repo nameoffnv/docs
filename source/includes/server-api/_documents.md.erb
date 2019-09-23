@@ -1,0 +1,194 @@
+## Documents
+
+Document resource represents a user’s document.
+
+> List of documents
+
+```json
+[
+  {
+    "id": "f1f80c7a-57c7-4259-8e80-d1bb09932e82",
+    "createdAt": 1543336121,
+    "status": "New",
+    "documentType": "Passport",
+    "description": "Custom document description",
+    "imageId": "f10c347a-59x2-4259-8e80-d1bb09932z30",
+    "imageHash": "D47D9147CB585F96AB6D6B34DB0D84DD0608E0F8BC6F7604E50373347E276272",
+    "mimeType": "image/jpeg",
+    "backImageId": "h53c347a-59x2-4259-8e80-d1bb09932z30",
+    "backImageHash": "C54D9147CB585F96AB6D6B34DB0D84DD0608E0F8BC6F7604E50373347E276272",
+    "backMimeType": "image/png",
+    "firstName": "Test",
+    "lastName": "User",
+    "number": "47313892501",
+    "dateOfBirth": 1543323121,
+    "dateOfIssue": 1543336122,
+    "dateOfExpiry": 1543336123,
+    "issuingCountry": "Country",
+    "issuingAuthority": "Authority",
+    "issuingPlace": "Place",
+    "address": "Address"
+  }
+]
+```
+
+> Document's public information (default)
+
+```json
+{
+  "id": "f1f80c7a-57c7-4259-8e80-d1bb09932e82",
+  "createdAt": 1543336121
+}
+```
+
+> Document's status (documents:status:read)
+
+```json
+{
+  ...
+  "status": "New"
+}
+```
+
+> Document's data (documents:data:read)
+
+```json
+{
+  ...
+  "documentType": "Passport",
+  "description": "Custom document description",
+  "imageId": "f10c347a-59x2-4259-8e80-d1bb09932z30",
+  "imageHash": "D47D9147CB585F96AB6D6B34DB0D84DD0608E0F8BC6F7604E50373347E276272",
+  "mimeType": "image/jpeg",
+  "backImageId": "h53c347a-59x2-4259-8e80-d1bb09932z30",
+  "backImageHash": "C54D9147CB585F96AB6D6B34DB0D84DD0608E0F8BC6F7604E50373347E276272",
+  "backMimeType": "image/png",
+  "firstName": "Test",
+  "lastName": "User",
+  "number": "47313892501",
+  "dateOfBirth": 1543323121,
+  "dateOfIssue": 1543336122,
+  "dateOfExpiry": 1543336123,
+  "issuingCountry": "Country",
+  "issuingAuthority": "Authority",
+  "issuingPlace": "Place",
+  "address": "Address"
+}
+```
+
+### Document resource
+
+|Fields                                                    |Description               |
+|----------------------------------------------------------|--------------------------|
+|`id` (*string*)                                           |Resource ID               |
+|`createdAt` (*timestamp*)                                 |Creation timestamp        |
+|`status` (*string*, [*enumerable*](#status))              |Document current status   |
+|`documentType` (*string*, [*enumerable*](#document-types))|Document type             |
+|`description` (*string*)                                  |Description               |
+|`imageId` (*string*)                                      |Front File ID             |
+|`imageHash` (*string*)                                    |Front File Hash           |
+|`mimeType` (*string*)                                     |Front File Content Type   |
+|`backImageId` (*string*)                                  |Back File ID              |
+|`backImageHash` (*string*)                                |Back File Hash            |
+|`backMimeType` (*string*)                                 |Back File Content Type    |
+|`firstName` (*string*)                                    |First name                |
+|`lastName` (*string*)                                     |Last name                 |
+|`number` (*string*)                                       |Document number           |
+|`dateOfBirth` (*timestamp*)                               |Date of birth             |
+|`dateOfIssue` (*timestamp*)                               |Document issue date       |
+|`dateOfExpiry` (*timestamp*)                              |Document expiration date  |
+|`issuingCountry` (*string*)                               |Document issuing country  |
+|`issuingAuthority` (*string*)                             |Document issuing authority|
+|`issuingPlace` (*string*)                                 |Document issuing place    |
+|`address` (*string*)                                      |Address                   |
+
+### Document types
+
+|Key            |Description   |
+|---------------|--------------|
+|`Passport`     |Passport      |
+|`DriverLicense`|Driver license|
+
+### Document statuses
+
+|Key          |Description                                             |
+|-------------|--------------------------------------------------------|
+|`New`        |Default status, not submitted to verification service   |
+|`Pending`    |Submitted to verification service, waiting result       |
+|`NotReadable`|Document not readable, need update document file (image)|
+|`NotVerified`|Received failed result from the verification service    |
+|`Verified`   |Document verified                                       |
+
+### Show user documents
+
+Returns all user documents.
+
+### HTTP Request
+
+`GET https://api.endpass.com/v1/documents`
+
+### Scopes
+
+- `documents:status:read`
+- `documents:data:read`
+
+```shell
+curl "https://api.endpass.com/v1/documents"
+  -H "Authorization: Bearer <access_token>"
+```
+
+### Show document
+
+Returns document by ID.
+
+### HTTP Request
+
+`GET https://api.endpass.com/v1/documents/{ID}`
+
+### Scopes
+
+- `documents:status:read`
+- `documents:data:read`
+
+```shell
+curl "https://api.endpass.com/v1/documents/{ID}"
+  -H "Authorization: Bearer <access_token>"
+```
+
+### Show document's front file
+
+Returns the document's front file content (jpeg, pdf) into `binary` stream.
+
+If there is no uploaded file returns *204*.
+
+### HTTP Request
+
+`GET https://api.endpass.com/v1/documents/{ID}/front/file`
+
+### Scopes
+
+- `documents:image:read`
+
+```shell
+curl "https://api.endpass.com/v1/documents/{ID}/front/file"
+  -H "Authorization: Bearer <access_token>"
+```
+
+### Show document's back file
+
+Returns the document's back file content (jpeg, pdf) into `binary` stream.
+
+If there is no uploaded file returns *204*.
+
+### HTTP Request
+
+`GET https://api.endpass.com/v1/documents/{ID}/back/file`
+
+### Scopes
+
+- `documents:image:read`
+
+```shell
+curl "https://api.endpass.com/v1/documents/{ID}/back/file"
+  -H "Authorization: Bearer <access_token>"
+```

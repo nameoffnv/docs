@@ -1,0 +1,47 @@
+```js
+import EndpassProviderPlugin from '@endpass/connect/provider';
+
+const web3 = new Web3('https://network.url');
+const connect = new EndpassProviderPlugin({
+  oauthClientId: !YOUR_CLIENT_ID!,
+});
+
+(async () => {
+  const provider = await connect.getProvider();
+  
+  // If you are using old versions of web3 (0.30.0-beta and below) you should call
+  // setProvider
+  web3.setProvider(provider);
+  
+  // If you are using new versions of web3 (1.0.0 and more) you can reassign
+  // global property ethereum in application window object
+  window.ethereum = provider;
+  
+  // We highly recommend to use both methods for more stability and compatibility
+  window.ethereum = provider;
+  web3.setProvider(provider);
+
+  // Modern dapp browsers...
+  if (window.ethereum) {
+    window.web3 = new Web3(ethereum);
+    try {
+        // Request account access if needed
+        await ethereum.enable();
+        // Acccounts now exposed
+        web3.eth.sendTransaction({/* ... */});
+    } catch (error) {
+        // User denied account access...
+    }
+  }
+  // Legacy dapp browsers...
+  else if (window.web3) {
+    window.web3 = new Web3(provider);
+    // Acccounts always exposed
+    web3.eth.sendTransaction({/* ... */});
+  }
+  // Non-dapp browsers...
+  else {
+    console.log('Non-Ethereum browser detected.');
+  }
+})();
+```

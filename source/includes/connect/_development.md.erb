@@ -33,10 +33,11 @@ Do not use `semantic-release`, it's not correctly working now!
 ### Catch oauth popup by localhost
 
 When developing oauth popup, url always will be `https://auth-dev.endpass.com`. If you need change this url to `localhost`:
- - open popup's devTools
- - run `location = location.toString().replace('https://auth-dev.endpass.com', 'http://localhost:8080')`
- - now ready to debug oauth in localhost
- 
+ - Open popup's devTools.
+ - If run in iframe mode, try to inspect any element inside iframe. Open console and check that location is `https://auth-dev.endpass.com`
+ - Run `location = location.toString().replace('https://auth-dev.endpass.com', 'http://localhost:8080')`
+ - Now ready to debug oauth in localhost
+
 ## Commands reference
 
 ### Development

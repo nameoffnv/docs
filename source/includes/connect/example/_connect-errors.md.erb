@@ -1,0 +1,48 @@
+```js
+import ConnectError from '@endpass/connect/ConnectError';
+
+const scopes = [
+  'user:email:read',
+  'user:phone:read',
+];
+
+const requestParams = {
+  url: 'https://api.endpass.com/v1/user',
+  method: 'GET'
+}
+
+// async/await
+(async () => {
+  try {
+    // Ask user to allow access to personal information
+    const result = await connect.loginWithOauth(scopes);
+  
+    // Fetch required data
+    const userInfo = await connect.request(requestParams);
+  } catch(e) {
+    // You can match the type of error from the imported instance
+    if (e.code === ConnectError.ERRORS.AUTH) {
+      handleError()
+    }
+
+    // Or Connect/Plugin instance
+    if (e.code === connect.ERRORS.AUTH) {
+      handleError()
+    }
+
+    console.log(e)
+  }
+})()
+
+// Promise/then
+connect.loginWithOauth(scopes)
+  .then(() => connect.request(requestParams));
+  .catch(console.log);
+
+// Suppose an error has been thrown and can be seen in the console.
+{
+  "message": "Some error message",
+  "code": "CODE_FROM_ERRORS_SECTION",
+  // ...other props from Error instance
+}
+```

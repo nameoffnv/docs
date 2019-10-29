@@ -2,7 +2,11 @@
 // Initialize Connect with clientId from vault and plugin composition
 const connect = new EndpassConnect({
   oauthClientId: !YOUR_CLIENT_ID!,
-  plugins: [EndpassOauthPlugin]
+  plugins: [EndpassOauthPlugin],
+  // Your can pass scopes to the instance or to each request separatly
+  scopes: ['user:email:read'],
+  // Choose popup separate window or modal iframe (default modal)
+  oauthPopup: false,
 });
 
 // or separate plugin instance

@@ -6,21 +6,19 @@ const scopes = [
 
 const requestParams = {
   url: 'https://api.endpass.com/v1/user',
-  method: 'GET'
+  method: 'GET',
+  // Also you can pass scopes to the instance
+  scopes,
 }
 
 // async/await
 (async () => {
-  // Ask user to allow access to personal information
-  const result = await connect.loginWithOauth(scopes);
-  
   // Fetch required data
   const userInfo = await connect.request(requestParams);
 })()
 
 // Promise/then
-connect.loginWithOauth(scopes)
-  .then(() => connect.request(requestParams));
+connect.request(requestParams)
   .then(console.log);
 
 // User info response

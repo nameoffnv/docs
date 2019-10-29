@@ -1,8 +1,6 @@
 ### Oauth
 
-| Method                | Params                                                                                | Returns                 | Description                                               |
-| --------------------- | ------------------------------------------------------------------------------------- | ----------------------- | --------------------------------------------------------- |
-| `loginWithOauth`      | {scopes: array<string>, popupHeight: number, popupWidth:number}                       | Promise                 | Authorizes with oauth flow and prepares for api requests. |
-| `request`             | `{ url: string, method: sting, headers: object, params: object, data: sting/object }` | Promise<HttpResponse>   | Makes and http request with access token                  |
-| `logoutFromOauth`     |                                                                                       |Promise                         | Logout oauth flow                                         |
-| `setOauthPopupParams` | {height: number, width:number}                                                        |Promise                         | Sets authorization popup dimensions.                      |
+| Method            | Params                                                                                                        | Returns               | Description                                                                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------------------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`         | `{ url: string, method: string, headers: object, params: object, data: string | object, scopes?: array<string> }` | Promise<HttpResponse> | Makes and http request with access token. You can pass [scopes](#scopes-list) to the instance constructor or to each request separately |
+| `logoutFromOauth` |                                                                                                               | Promise               | Logout oauth flow                                                                                                                       |

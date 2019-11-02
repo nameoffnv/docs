@@ -1,0 +1,34 @@
+```js
+const params = {
+  // CSS selector or HTMLElement
+  element: 'div#login',
+  // Your callback
+  onLogin: (err, user) => console.log(user),
+  // Filled/light skin (default filled)
+  isLight: false,
+  // Optional custom button text (pass default for example)
+  label: 'Sign in with Endpass'
+}
+
+// async/await
+(async () => {
+  const button = await connect.createLoginButton(params);
+  // And can mount/unmount this button
+  button.mount()
+  // ...your code
+})()
+
+// Promise/then
+connect.createLoginButton(params)
+  .then(() => { 
+    button.mount()
+    // ...your code 
+  });
+
+// If the user clicks on the button and successfully
+// continues the login process you will see in the console (callback onLogin)
+{
+  "id": "0d8c5fa3-c8a5-4c5f-8435-f35aef353f30",
+  "email": "user@endpass.com",
+}
+```

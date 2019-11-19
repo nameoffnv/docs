@@ -4,10 +4,15 @@ Scope: `user:address:read`
 
 Request: `GET https://api.endpass.com/v1/user/address`
 
+Return list of user's addresses.
+
 Fields:
 
 |Field                                       |Description        |
 |--------------------------------------------|-------------------|
+|`main`            (*boolean*)               | Main address flag |
+|`status`          (*string*)                | Address status    |
+|`created_at`      (*number*)                | Timestamp, UTC tz |
 |`apartmentNumber` (*string*)                | Apartment number  |
 |`streetNumber`    (*string*)                | Street Number     |
 |`street`          (*string*)                | Street name       |
